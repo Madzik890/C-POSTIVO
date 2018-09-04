@@ -1,5 +1,9 @@
 #include "shipments.h"
 
+/// <summary>
+/// Gets a shipment ID, from the user inputs.
+/// </summary>
+/// <param name = "shipmentID"> Pointer to a string which filled with an id. </param>
 void getShipmentID(char ** shipmentID)
 {
   char * s_shipment = malloc(sizeof(char) * 255);
@@ -8,6 +12,10 @@ void getShipmentID(char ** shipmentID)
   (*shipmentID) = s_shipment;
 }
 
+/// <summary>
+/// Prints information about shipments.
+/// </summary>
+/// <param name = "arrayOfShipments"> Results from the API </param>
 void printfShipments(struct ArrayOfShipments * arrayOfShipments)
 {
   for(int i = 0; i < arrayOfShipments->__size; i++)

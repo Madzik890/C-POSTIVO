@@ -1,6 +1,6 @@
 /*
  * Postivo API is aplication create for handling the web service "Postvio".
- * The backend for handling SOAP, was created via GSOAP. The Aplication using GSOAPSSL.
+ * API creates via gSOAP and works with gSOAPSSL.
  * In each function is used prefix "post". It shortcut of postivo.
  */
 #include "soap/Postivo_x002eplBinding.nsmap"
@@ -32,7 +32,7 @@ void initPostivoAPI()
 }
 
 /// <summary>
-/// Releasing a memory.
+/// Releasing the memory.
 /// </summary>
 void closePostivoAPI()
 {
@@ -43,13 +43,13 @@ void closePostivoAPI()
 
 /// <summary>
 /// Creates a request to send a letter.
-/// Currently sents to webservice a only 1 file to only 1 recipient.
+/// Currently sents to webservice a only 1 file to only a 1 recipient.
 /// In the future, will be possible to send to a more than 1 recipient and more than 1 file.
 /// When gets any error, returns it code.
 /// List of error code: https://postivo.pl/docs/Dokumentacja_API_Postivo.pdf
 /// </summary>
-/// <param name = "login"> </param>
-/// <param name = "password"> </param>
+/// <param name = "login"> Login </param>
+/// <param name = "password"> Password </param>
 void postDispatch(const char * login, const char * password)
 {
   struct ns1__DocumentFile m_file;
@@ -107,8 +107,8 @@ void postDispatch(const char * login, const char * password)
 /// When gets any error, returns it code.
 /// List of error code: https://postivo.pl/docs/Dokumentacja_API_Postivo.pdf
 /// </summary>
-/// <param name = "login"> </param>
-/// <param name = "password"> </param>
+/// <param name = "login"> Login </param>
+/// <param name = "password"> Password </param>
 void postGetDispatchStatus(const char * login, const char * password)
 {
   struct ArrayOfDispatchIds m_arrayDispatchIDs;
@@ -139,13 +139,13 @@ void postGetDispatchStatus(const char * login, const char * password)
 }
 
 /// <summary>
-/// Connects to webserivce and gets the default account info.
-/// User must inpute a login and a password.
-/// When gets any error, returns it code.
+/// Connects to webservice and gets the default account info.
+/// User must inputes a login and a password.
+/// When gets any error, returns code.
 /// List of error code: https://postivo.pl/docs/Dokumentacja_API_Postivo.pdf
 /// </summary>
-/// <param name = "login"> login </param>
-/// <param name = "password"> password </param>
+/// <param name = "login"> Login </param>
+/// <param name = "password"> Password </param>
 void postGetBalance(const char * login, const char * password)
 {
   struct ns2__getBalanceResponse m_balanceStatus;//object which is returning in the SOAP function
@@ -175,12 +175,12 @@ void postGetBalance(const char * login, const char * password)
 
 /// <summary>
 /// Connects to webserivce and gets the price of dispatch.
-/// User must inpute a login and a password.
-/// When gets any error, returns it code.
+/// User must inputes a login and a password.
+/// When gets any error, returns code.
 /// List of error code: https://postivo.pl/docs/Dokumentacja_API_Postivo.pdf
 /// </summary>
-/// <param name = "login"> login </param>
-/// <param name = "password"> password </param>
+/// <param name = "login"> Login </param>
+/// <param name = "password"> Password </param>
 void postGetPrice(const char * login, const char * password)
 {
   struct ns1__DocumentFile m_file;

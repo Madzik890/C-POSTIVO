@@ -5,6 +5,10 @@
 char * assingSource(const int answer);
 char * assingString(const char * consoleWrite);
 
+/// <summary>
+/// Creats the recipient from user inputs.
+/// </summary>
+/// <param name = "recipient"> Pointer to recipient object. </param>
 void createRecipient(struct ns1__Recipient * recipient)
 {
   struct ns1__Recipient m_recipient;
@@ -63,6 +67,11 @@ void createRecipient(struct ns1__Recipient * recipient)
   (*recipient) = m_recipient;
 }
 
+/// <summary>
+/// Assing a string to proper answer.
+/// </summary>
+/// <param name = "answer"> Answer form main function. </param>
+/// <return> The proper answer. </return>
 char * assingSource(const int answer)
 {
   char * s_string = malloc(sizeof(char) * 20);
@@ -87,6 +96,11 @@ char * assingSource(const int answer)
   return s_string;
 }
 
+/// <summary>
+/// Gets an information from user inputs.
+/// </summary>
+/// <param name = "consoleWrite"> An information prints in console </param>
+/// <return> user inputs </return>
 char * assingString(const char * consoleWrite)
 {
     char * s_string = malloc(sizeof(char) * 100);

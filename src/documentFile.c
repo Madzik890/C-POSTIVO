@@ -7,6 +7,11 @@
 #include <stdio.h>
 #include <string.h>//strlen
 
+/// <summary>
+/// Gets path to a file and title named by user.
+/// </summary>
+/// <param name = "filePath"> Pointer to a file path </param>
+/// <param name = "fileTitle"> Pointer to a file title named by user </param>
 void inputFilePath(char ** filePath, char ** fileTitle)
 {
   char * s_filePath = malloc(sizeof(char) * 255);
@@ -21,11 +26,11 @@ void inputFilePath(char ** filePath, char ** fileTitle)
 }
 
 /// <summary>
-/// Opens the document file and loads it to the struct which stores buffer with the file.
-/// Next, document is sends to the website.
+/// Opens a document file and loads it to
+/// the struct which stores buffer with the file.
 /// </summary>
-/// <param name = "fileLocation"> Contain the location to file. <param>
-/// <param name = "document"> Struct which have variable to contain the file and it title. <param>
+/// <param name = "fileLocation"> Contain a location to file. <param>
+/// <param name = "document"> Pointer to object which contains a file stream and a title. <param>
 void loadDocumentFile(const char * fileLocation, const char * fileTitle, struct ns1__DocumentFile * document)
 {
   FILE * m_file;

@@ -3,6 +3,7 @@
 #include <string.h>//strcpy
 
 /// <summary>
+/// Gets an account login and password.
 /// </summary>
 /// <return> User object which login and password. </return>
 struct userLog getUserLog()
@@ -28,6 +29,10 @@ struct userLog getUserLog()
   return m_user;//return a user data
 }
 
+/// <summary>
+/// Releases the user login and password.
+/// </summary>
+/// <param name = "user"> Pointer to a user struct </param>
 void freeUserLog(struct userLog * user)
 {
   free(user->s_login);
