@@ -17,7 +17,9 @@ int main(int argc, char ** argv)
     exit(1);
   }
 
-  struct userLog user = getUserLog();
+  struct userLog user; //= getUserLog();
+  user.s_login = "gsoap";
+  user.s_password = "Ruger1234";
   initPostivoAPI();
 
   for(int i = 1; i <= argc - 1;i++)
@@ -33,9 +35,11 @@ int main(int argc, char ** argv)
 
     if(!strcmp( argv[ i ], "-gp" ) || !strcmp( argv[ i ], "-gP" ) || !strcmp( argv[ i ], "-getPrice" ))//get price
       postGetPrice(user.s_login, user.s_password);
+
+    if(!strcmp( argv[ i ], "-gcp" ) || !strcmp( argv[ i ], "-gCP" ) || !strcmp( argv[ i ], "-getConfigProfiles" ))//get price
+      postGetConfigProfiles(user.s_login, user.s_password);
   }
 
-  freeUserLog(&user);
   closePostivoAPI();
 
   return 0;

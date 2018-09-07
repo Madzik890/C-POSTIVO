@@ -11,7 +11,21 @@
 
 /// <global instances>
 struct soap * g_soap;
+char * s_endAction = NULL;//prepare to using servers
+char * s_soapAction = NULL;//prepare to using servers
 /// </global instances>
+
+/// <summary>
+/// Prints the error code.
+/// Created only for clean code.
+/// </summary>
+/// <param name = "errorCode"> Code of error. </param>
+void printErrorMessage(const char * errorCode)
+{
+  printf("---------------------------------------------------\n");//for transparency
+  printf("The request has been sent but something went wrong.\n");
+  printf("Error code: %s\n",errorCode);
+}
 
 /// <summary>
 /// Prepare the "g_soap", to work with the Postivo API.
@@ -50,7 +64,7 @@ void closePostivoAPI()
 /// </summary>
 /// <param name = "login"> Login </param>
 /// <param name = "password"> Password </param>
-void postDispatch(const char * login, const char * password)
+void postDispatch(char * login, char * password)
 {
   struct ns1__DocumentFile m_file;
   char * s_filePath = NULL;
@@ -77,7 +91,7 @@ void postDispatch(const char * login, const char * password)
 
 
   struct ns2__getDispatchStatusResponse m_dispatchStatus;
-  if(soap_call_ns2__dispatch(g_soap, NULL, NULL, login, password, "1",&m_arrayDocuments, &m_arrayRecipients ,&options, &m_dispatchStatus) == SOAP_OK)//try execute the soap method
+  if(soap_call_ns2__dispatch(g_soap, s_endAction, s_soapAction, login, password, "1",&m_arrayDocuments, &m_arrayRecipients ,&options, &m_dispatchStatus) == SOAP_OK)//try execute the soap method
   {
     if(!strcmp(m_dispatchStatus.return_->result, "OK"))//if is no error
     {
@@ -86,17 +100,16 @@ void postDispatch(const char * login, const char * password)
       printf("The request has been sent.\n");
     }
     else
-    {
-      printf("---------------------------------------------------\n");//for transparency
-      printf("The request has been sent but something went wrong.\n");
-      printf("Error code: %s\n",m_dispatchStatus.return_->result_USCOREcode );
-    }
+      printErrorMessage(m_dispatchStatus.return_->result_USCOREcode);
   }
   else
     soap_print_fault(g_soap, stderr);//print error
 
+  free(m_arrayRecipients.__ptr);
+  free(m_arrayDocuments.__ptr);
   free(s_filePath);
   free(s_fileTitle);
+  freeRecipient(&m_recipient);
   freeDocumentFile(&m_file);
 }
 
@@ -109,7 +122,7 @@ void postDispatch(const char * login, const char * password)
 /// </summary>
 /// <param name = "login"> Login </param>
 /// <param name = "password"> Password </param>
-void postGetDispatchStatus(const char * login, const char * password)
+void postGetDispatchStatus(char * login, char * password)
 {
   struct ArrayOfDispatchIds m_arrayDispatchIDs;
   m_arrayDispatchIDs.__ptr = calloc(1,sizeof(char *));
@@ -117,7 +130,7 @@ void postGetDispatchStatus(const char * login, const char * password)
   getShipmentID(&m_arrayDispatchIDs.__ptr[0]);
 
   struct ns2__getDispatchStatusResponse m_dispatchStatus;
-  if(soap_call_ns2__getDispatchStatus(g_soap, NULL, NULL, login, password, &m_arrayDispatchIDs, &m_dispatchStatus) == SOAP_OK)
+  if(soap_call_ns2__getDispatchStatus(g_soap, s_endAction, s_soapAction, login, password, &m_arrayDispatchIDs, &m_dispatchStatus) == SOAP_OK)
   {
     if(!strcmp(m_dispatchStatus.return_->result, "OK"))//if is no error
     {
@@ -128,11 +141,7 @@ void postGetDispatchStatus(const char * login, const char * password)
       printfShipments(&m_dispatchStatus.return_->shipments);
     }
     else
-    {
-      printf("---------------------------------------------------\n");//for transparency
-      printf("The request has been sent but something went wrong.\n");
-      printf("Error code: %s\n",m_dispatchStatus.return_->result_USCOREcode );
-    }
+      printErrorMessage(m_dispatchStatus.return_->result_USCOREcode);
   }
   else
     soap_print_fault(g_soap, stderr);//print error
@@ -146,11 +155,11 @@ void postGetDispatchStatus(const char * login, const char * password)
 /// </summary>
 /// <param name = "login"> Login </param>
 /// <param name = "password"> Password </param>
-void postGetBalance(const char * login, const char * password)
+void postGetBalance(char * login, char * password)
 {
   struct ns2__getBalanceResponse m_balanceStatus;//object which is returning in the SOAP function
 
-  if(soap_call_ns2__getBalance(g_soap, NULL, NULL, login, password, &m_balanceStatus) == SOAP_OK)//try execute the soap method
+  if(soap_call_ns2__getBalance(g_soap, s_endAction, s_soapAction, login, password, &m_balanceStatus) == SOAP_OK)//try execute the soap method
   {
     if(!strcmp(m_balanceStatus.return_->result, "OK"))//if is no error
     {
@@ -162,12 +171,8 @@ void postGetBalance(const char * login, const char * password)
       else
         printf("Account type: POST-PAID\n");
     }
-    else//if is error
-    {
-      printf("------------------------\n");//for transparency
-      printf("Cannot get account info. \n");
-      printf("Error code: %s\n", m_balanceStatus.return_->result_USCOREcode);//print error
-    }
+    else
+      printErrorMessage(m_balanceStatus.return_->result_USCOREcode);
   }
   else
     soap_print_fault(g_soap, stderr);//print error
@@ -181,7 +186,7 @@ void postGetBalance(const char * login, const char * password)
 /// </summary>
 /// <param name = "login"> Login </param>
 /// <param name = "password"> Password </param>
-void postGetPrice(const char * login, const char * password)
+void postGetPrice(char * login, char * password)
 {
   struct ns1__DocumentFile m_file;
   char * s_filePath = NULL;
@@ -212,19 +217,35 @@ void postGetPrice(const char * login, const char * password)
       printf("The status has been received.\n");
     }
     else
-    {
-      printf("---------------------------------------------------\n");//for transparency
-      printf("The request has been sent but something went wrong.\n");
-      printf("Error code: %s\n",m_priceStatus.return_->result_USCOREcode );
-    }
+      printErrorMessage(m_priceStatus.return_->result_USCOREcode);
   }
   else
     soap_print_fault(g_soap, stderr);//print error
 }
 
-void postGetConfigProfiles()
+/// <summary>
+/// Connects to service and gets config profiles.
+/// User must inputes a login and a password.
+/// When gets any error, returns code.
+/// List of error code: https://postivo.pl/docs/Dokumentacja_API_Postivo.pdf
+/// </summary>
+/// <param name = "login"> Login </param>
+/// <param name = "password"> Password </param>
+void postGetConfigProfiles(char * login, char * password)
 {
-
+  struct ns2__getConfigProfilesResponse m_configProfilesStatus;
+  if(soap_call_ns2__getConfigProfiles(g_soap, s_endAction, s_soapAction, login, password, "1", &m_configProfilesStatus) == SOAP_OK)
+  {
+    if(!strcmp(m_configProfilesStatus.return_->result, "OK"))//if is no error
+    {
+      printf("--------------------------\n");//for transparency
+      printf("Successfull\n");
+      printf("The status has been received.\n");
+    }
+    else
+      printErrorMessage(m_configProfilesStatus.return_->result_USCOREcode);
+  }
+  soap_print_fault(g_soap, stderr);
 }
 
 void postGetSenders()

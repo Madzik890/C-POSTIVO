@@ -12,6 +12,5 @@ struct userLog
 };
 
 struct userLog  getUserLog();
-void freeUserLog(struct userLog * user);
 
 #endif

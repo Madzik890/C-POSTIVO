@@ -5,17 +5,19 @@
 
 /// <global instances>
 extern struct soap * g_soap;
+char * s_endAction;
+char * s_soapAction;
 /// </global instances>
 
 /// <functions>
 void initPostivoAPI();
 void closePostivoAPI();
 
-void postDispatch(const char * login, const char * password);
-void postGetDispatchStatus(const char * login,const char * password);
-void postGetBalance(const char * login, const char * password);
-void postGetPrice(const char * login, const char * password);
-void postGetConfigProfiles();
+void postDispatch(char * login, char * password);
+void postGetDispatchStatus(char * login, char * password);
+void postGetBalance(char * login, char * password);
+void postGetPrice(char * login, char * password);
+void postGetConfigProfiles(char * login, char * password);
 void postGetSenders();
 void postGetCertificate();
 void postAddSender();

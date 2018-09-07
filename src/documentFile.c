@@ -4,9 +4,12 @@
  */
 #include "documentFile.h"
 #include "base64/base64.h"
+#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>//strlen
 
+#define STRING_SIZE 255
+//fgets(s_fileTitle, STRING_SIZE - 1, stdin);//buffer must be less than STRING_SIZE
 /// <summary>
 /// Gets path to a file and title named by user.
 /// </summary>
@@ -14,8 +17,8 @@
 /// <param name = "fileTitle"> Pointer to a file title named by user </param>
 void inputFilePath(char ** filePath, char ** fileTitle)
 {
-  char * s_filePath = malloc(sizeof(char) * 255);
-  char * s_fileTitle = malloc(sizeof(char) * 255);
+  char * s_filePath = malloc(sizeof(char) * STRING_SIZE);
+  char * s_fileTitle = malloc(sizeof(char) * STRING_SIZE);
   printf("Enter the file path:");
   scanf("%s", s_filePath);
   printf("Enter the file title:");
@@ -31,7 +34,7 @@ void inputFilePath(char ** filePath, char ** fileTitle)
 /// </summary>
 /// <param name = "fileLocation"> Contain a location to file. <param>
 /// <param name = "document"> Pointer to object which contains a file stream and a title. <param>
-void loadDocumentFile(const char * fileLocation, const char * fileTitle, struct ns1__DocumentFile * document)
+void loadDocumentFile(const char * fileLocation,char * fileTitle, struct ns1__DocumentFile * document)
 {
   FILE * m_file;
   struct ns1__DocumentFile m_document;
@@ -56,11 +59,17 @@ void loadDocumentFile(const char * fileLocation, const char * fileTitle, struct 
 
     fclose(m_file);//close the file
   }
+  else
+  {
+    printf("-------------\n");
+    printf("Cannot reads this file:%s\n", fileLocation);
+    exit(1);
+  }
   (*document) = m_document;
 }
 
 /// <summary>
-/// Releases the memory after sent this file.
+/// Releases memory after sent a file.
 /// </summary>
 void freeDocumentFile(struct ns1__DocumentFile * document)
 {
