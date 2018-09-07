@@ -1,6 +1,5 @@
 #ifndef POSTIVO_API_H
 #define POSTIVO_API_H
-
 #include "soap/soapH.h"
 
 /// <global instances>

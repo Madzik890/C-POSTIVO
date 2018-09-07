@@ -60,7 +60,7 @@ void closePostivoAPI()
 /// Currently sents to webservice a only 1 file to only a 1 recipient.
 /// In the future, will be possible to send to a more than 1 recipient and more than 1 file.
 /// When gets any error, returns it code.
-/// List of error code: https://postivo.pl/docs/Dokumentacja_API_Postivo.pdf
+/// List of error codes: https://postivo.pl/docs/Dokumentacja_API_Postivo.pdf
 /// </summary>
 /// <param name = "login"> Login </param>
 /// <param name = "password"> Password </param>
@@ -118,7 +118,7 @@ void postDispatch(char * login, char * password)
 /// Currently receives from webservice a only 1 file to only a 1 recipient.
 /// In the future, will be possible to receives to a more than 1 recipient and more than a 1 file.
 /// When gets any error, returns it code.
-/// List of error code: https://postivo.pl/docs/Dokumentacja_API_Postivo.pdf
+/// List of error codes: https://postivo.pl/docs/Dokumentacja_API_Postivo.pdf
 /// </summary>
 /// <param name = "login"> Login </param>
 /// <param name = "password"> Password </param>
@@ -151,7 +151,7 @@ void postGetDispatchStatus(char * login, char * password)
 /// Connects to webservice and gets the default account info.
 /// User must inputes a login and a password.
 /// When gets any error, returns code.
-/// List of error code: https://postivo.pl/docs/Dokumentacja_API_Postivo.pdf
+/// List of error codes: https://postivo.pl/docs/Dokumentacja_API_Postivo.pdf
 /// </summary>
 /// <param name = "login"> Login </param>
 /// <param name = "password"> Password </param>
@@ -182,7 +182,7 @@ void postGetBalance(char * login, char * password)
 /// Connects to webserivce and gets the price of dispatch.
 /// User must inputes a login and a password.
 /// When gets any error, returns code.
-/// List of error code: https://postivo.pl/docs/Dokumentacja_API_Postivo.pdf
+/// List of error codes: https://postivo.pl/docs/Dokumentacja_API_Postivo.pdf
 /// </summary>
 /// <param name = "login"> Login </param>
 /// <param name = "password"> Password </param>
@@ -227,7 +227,7 @@ void postGetPrice(char * login, char * password)
 /// Connects to service and gets config profiles.
 /// User must inputes a login and a password.
 /// When gets any error, returns code.
-/// List of error code: https://postivo.pl/docs/Dokumentacja_API_Postivo.pdf
+/// List of error codes: https://postivo.pl/docs/Dokumentacja_API_Postivo.pdf
 /// </summary>
 /// <param name = "login"> Login </param>
 /// <param name = "password"> Password </param>
