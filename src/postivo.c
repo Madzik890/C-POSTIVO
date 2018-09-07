@@ -17,9 +17,7 @@ int main(int argc, char ** argv)
     exit(1);
   }
 
-  struct userLog user; //= getUserLog();
-  user.s_login = "gsoap";
-  user.s_password = "Ruger1234";
+  struct userLog user = getUserLog();
   initPostivoAPI();
 
   for(int i = 1; i <= argc - 1;i++)
