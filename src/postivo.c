@@ -45,11 +45,12 @@ int main(int argc, char ** argv)
 
 void helpArgv()
 {
-  printf("Usage Postivo [-d -dispatch] [-gd -gD -getdispatch] [-gb -gB -getbalance] [-gp -gP -getprice]\n");
+  printf("Usage Postivo [-d -dispatch] [-gd -gD -getdispatch] [-gb -gB -getbalance] [-gp -gP -getprice] [-gcp -gCP] -getConfigProfiles\n");
 
   printf("\nOptions: \n");
   printf("   -d               Dispatch shipment. \n");
   printf("   -gd              Get status of shipment. \n");
   printf("   -gb              Get accout balance. \n");
   printf("   -gp              Get price of shipment. \n");
+  printf("   -gcp             Get config profiles. \n");
 }

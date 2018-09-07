@@ -134,7 +134,7 @@ void postGetDispatchStatus(char * login, char * password)
   {
     if(!strcmp(m_dispatchStatus.return_->result, "OK"))//if is no error
     {
-      printf("--------------------------\n");//for transparency
+      printf("---------------------------\n");//for transparency
       printf("Successfull\n");
       printf("The status has been received.\n");
       printf("Result:\n");
