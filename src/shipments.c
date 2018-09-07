@@ -7,8 +7,8 @@
 void getShipmentID(char ** shipmentID)
 {
   char * s_shipment = malloc(sizeof(char) * 255);
-  printf("Enter the shipment ID:\n");
-  scanf("%s", &s_shipment);//waits for user input
+  printf("Enter the shipment ID:");
+  scanf("%s", (*s_shipment));//waits for user input
   (*shipmentID) = s_shipment;
 }
 
