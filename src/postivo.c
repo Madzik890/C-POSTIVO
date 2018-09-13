@@ -6,6 +6,10 @@ void helpArgv();
 
 int main(int argc, char ** argv)
 {
+  #ifdef DWITH_OPENSSL
+  printf("xd");
+  #endif
+
   if(argc == 1)//zero arguments
   {
     helpArgv();

@@ -15,7 +15,7 @@ void removeNewLine(char* string);
 void createRecipient(struct ns1__Recipient * recipient)
 {
   struct ns1__Recipient m_recipient;
-  unsigned int l_sourceAnswer = 0;
+  int l_sourceAnswer = 0;
   printf("1)Group\n");
   printf("2)Book \n");
   printf("3)Inline \n");
@@ -29,8 +29,8 @@ void createRecipient(struct ns1__Recipient * recipient)
   {
     printf("Enter the recipient's id :");
     scanf("%d", &i_id);//waits for user input
-    m_recipient.id = malloc(sizeof(int));
-    m_recipient.id[0] = i_id;
+    m_recipient.id = malloc(sizeof(int) * 1);
+    m_recipient.id = i_id;
   }
   /// </assing the id>
 

@@ -3,7 +3,9 @@
  * API creates via gSOAP and works with gSOAPSSL.
  * In each function is used prefix "post". It shortcut of postivo.
  */
+
 #include "soap/Postivo_x002eplBinding.nsmap"
+
 #include "postivoAPI.h"
 #include "documentFile.h"//used in: postDispatch
 #include "shipments.h"//used in: postGetDispatchStatus
@@ -38,6 +40,7 @@ void initPostivoAPI()
 
   soap_set_imode(g_soap, SOAP_C_UTFSTRING); //input
   soap_set_omode(g_soap, SOAP_C_UTFSTRING); //output?
+
   if (soap_ssl_server_context(g_soap, SOAP_SSL_NO_AUTHENTICATION, NULL, NULL, NULL, NULL, NULL, NULL, NULL))//init SSL with no AUTHENTICATION
   {
     soap_print_fault(g_soap, stderr);//print error
